@@ -19,7 +19,10 @@ public:
     DoubleObservable(double val) : val(val) {}
     double Get() {return val;}
     void ChangeBy(double change_amount) {ChangeTo(val + change_amount);}
-    void ChangeTo(double new_value) {val = new_value; update_observers();}
+    void ChangeTo(double new_value) {
+        val = new_value; 
+        update_observers();
+    }
     std::string ToString() {return std::to_string(val);}
 
     void RegisterObserver(std::shared_ptr<DoubleObserver> obs) {
