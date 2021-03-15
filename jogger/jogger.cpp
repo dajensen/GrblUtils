@@ -170,7 +170,6 @@ bool GetInitialValues(SerialDataIoImpl &serial, double *vals) {
         StatusQueryMessage query;
         comm.SendRequest(query);
     }
-
     if(initstatus.HaveInitialStatus()) {
         for(int i = 0; i < AxisNames::NUM_AXES; i++) {
             vals[i] = initstatus.GetValue((AxisNames)i);
@@ -201,7 +200,6 @@ int main(int argc, char *argv[]){
     }
 
     printf("Getting initial settings from Grbl\n");
-
     double initial_values[AxisNames::NUM_AXES];
     if(!GetInitialValues(SerialDataIo, initial_values)) {
         printf("Unable to get initial values\n");
@@ -213,10 +211,10 @@ int main(int argc, char *argv[]){
 
     std::shared_ptr<Screen::ReinitNotifier> screen_notifier = std::make_shared<Screen::ReinitNotifier>();
     Screen screen(screen_notifier);
+
     OutputWindow *pOutputWin = OutputWindow::GetInstance(stdscr, "Output", COLOR_PAIR(3), 
                                         AxisReport::WIN_HEIGHT, 0, screen.GetCols(), screen.GetRows() - AxisReport::WIN_HEIGHT);
     Keyboard keyboard;
-
     WelcomeMessage welcome;
     comm.SendRequest(welcome);
 
@@ -232,7 +230,6 @@ int main(int argc, char *argv[]){
         axis.emplace_back(NameToString((AxisNames)i), comm);
     }
     toppanel.SetAxes(axis);
-
     // Initialize each axis with the observers in place
     for(int i = 0; i < NUM_AXES; i++){
         axis[i].ChangeTo(initial_values[i]);
