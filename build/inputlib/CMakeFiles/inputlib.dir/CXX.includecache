@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/dave/Documents/GitHub/GrblUtils/inputlib/keyboard.cpp
+stdlib.h
+-
+ncurses.h
+-
+string
+-
+keyboard.h
+/home/dave/Documents/GitHub/GrblUtils/inputlib/keyboard.h
+
+/home/dave/Documents/GitHub/GrblUtils/inputlib/keyboard.h
+

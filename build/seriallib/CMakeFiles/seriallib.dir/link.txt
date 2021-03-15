@@ -1,0 +1,2 @@
+/usr/bin/ar qc libseriallib.a CMakeFiles/seriallib.dir/SerialDataIo.cpp.o CMakeFiles/seriallib.dir/GrblCommunicator.cpp.o CMakeFiles/seriallib.dir/GrblReply.cpp.o CMakeFiles/seriallib.dir/GrblReplyDispatcher.cpp.o CMakeFiles/seriallib.dir/AxisNames.cpp.o CMakeFiles/seriallib.dir/Replies/Status.cpp.o
+/usr/bin/ranlib libseriallib.a

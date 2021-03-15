@@ -45,6 +45,10 @@ bool startswith(std::string str, std::string key) {
     return str.rfind(key, 0) == 0;
 }
 
+bool contains(std::string str, std::string key) {
+    return str.find(key) != string::npos;
+}
+
 const std::string WHITESPACE = " \n\r\t\f\v";
  
 std::string ltrim(const std::string& s, const std::string chars_to_strip)

@@ -20,3 +20,5 @@ add_subdirectory(baselib)
 add_subdirectory(jogger)
 add_subdirectory(sender)
 add_subdirectory(test)
+
+add_subdirectory(JoystickTest)

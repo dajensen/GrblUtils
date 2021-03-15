@@ -1,0 +1,42 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/dave/Documents/GitHub/GrblUtils/screenlib/screen.cpp
+stdio.h
+-
+string.h
+-
+unistd.h
+-
+stdint.h
+-
+stdlib.h
+-
+termios.h
+-
+ncurses.h
+-
+signal.h
+-
+sys/ioctl.h
+-
+array
+-
+vector
+-
+string
+-
+memory
+-
+utility
+-
+screen.h
+/home/dave/Documents/GitHub/GrblUtils/screenlib/screen.h
+
+/home/dave/Documents/GitHub/GrblUtils/screenlib/screen.h
+

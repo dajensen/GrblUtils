@@ -1,0 +1,2 @@
+/usr/bin/ar qc libinputlib.a CMakeFiles/inputlib.dir/keyboard.cpp.o
+/usr/bin/ranlib libinputlib.a
