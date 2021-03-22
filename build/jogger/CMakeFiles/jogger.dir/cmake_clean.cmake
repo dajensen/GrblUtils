@@ -2,6 +2,7 @@ file(REMOVE_RECURSE
   "../../bin/jogger"
   "../../bin/jogger.pdb"
   "CMakeFiles/jogger.dir/InitStatusListener.cpp.o"
+  "CMakeFiles/jogger.dir/JogTracker.cpp.o"
   "CMakeFiles/jogger.dir/axis.cpp.o"
   "CMakeFiles/jogger.dir/axisreport.cpp.o"
   "CMakeFiles/jogger.dir/jogger.cpp.o"

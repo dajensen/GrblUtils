@@ -10,8 +10,6 @@
 memory
 -
 
-../baselib/DoubleObserver.h
-
 ../baselib/FileLogger.h
 
 ../baselib/OutputWindow.h
@@ -21,6 +19,8 @@ log.h
 ../baselib/Utils.h
 
 ../baselib/log.h
+
+../inputlib/input.h
 
 ../inputlib/keyboard.h
 
@@ -48,109 +48,11 @@ log.h
 
 ../seriallib/SerialDataIo.h
 
-/home/dave/Documents/GitHub/GrblUtils/sender/EmptyListener.cpp
-stdlib.h
--
-ncurses.h
--
-string
--
-vector
--
-memory
--
-log.h
-/home/dave/Documents/GitHub/GrblUtils/sender/log.h
-Utils.h
-/home/dave/Documents/GitHub/GrblUtils/sender/Utils.h
-CircularBuffer.h
-/home/dave/Documents/GitHub/GrblUtils/sender/CircularBuffer.h
-DoubleObserver.h
-/home/dave/Documents/GitHub/GrblUtils/sender/DoubleObserver.h
-AxisNames.h
-/home/dave/Documents/GitHub/GrblUtils/sender/AxisNames.h
-SerialDataIo.h
-/home/dave/Documents/GitHub/GrblUtils/sender/SerialDataIo.h
-GrblRequest.h
-/home/dave/Documents/GitHub/GrblUtils/sender/GrblRequest.h
-GrblReply.h
-/home/dave/Documents/GitHub/GrblUtils/sender/GrblReply.h
-GrblReplyDispatcher.h
-/home/dave/Documents/GitHub/GrblUtils/sender/GrblReplyDispatcher.h
-GrblCommunicator.h
-/home/dave/Documents/GitHub/GrblUtils/sender/GrblCommunicator.h
-GcodeCommunicator.h
-/home/dave/Documents/GitHub/GrblUtils/sender/GcodeCommunicator.h
-Replies/Empty.h
-/home/dave/Documents/GitHub/GrblUtils/sender/Replies/Empty.h
-EmptyListener.h
 /home/dave/Documents/GitHub/GrblUtils/sender/EmptyListener.h
-
-/home/dave/Documents/GitHub/GrblUtils/sender/EmptyListener.h
-
-/home/dave/Documents/GitHub/GrblUtils/sender/GcodeCommunicator.cpp
-string
--
-memory
--
-vector
--
-log.h
-/home/dave/Documents/GitHub/GrblUtils/sender/log.h
-Utils.h
-/home/dave/Documents/GitHub/GrblUtils/sender/Utils.h
-CircularBuffer.h
-/home/dave/Documents/GitHub/GrblUtils/sender/CircularBuffer.h
-SerialDataIo.h
-/home/dave/Documents/GitHub/GrblUtils/sender/SerialDataIo.h
-GrblRequest.h
-/home/dave/Documents/GitHub/GrblUtils/sender/GrblRequest.h
-GrblReply.h
-/home/dave/Documents/GitHub/GrblUtils/sender/GrblReply.h
-GrblReplyDispatcher.h
-/home/dave/Documents/GitHub/GrblUtils/sender/GrblReplyDispatcher.h
-GrblCommunicator.h
-/home/dave/Documents/GitHub/GrblUtils/sender/GrblCommunicator.h
-GcodeCommunicator.h
-/home/dave/Documents/GitHub/GrblUtils/sender/GcodeCommunicator.h
 
 /home/dave/Documents/GitHub/GrblUtils/sender/GcodeCommunicator.h
 
 /home/dave/Documents/GitHub/GrblUtils/sender/LineReader.h
-
-/home/dave/Documents/GitHub/GrblUtils/sender/StatusListener.cpp
-stdlib.h
--
-ncurses.h
--
-string
--
-vector
--
-memory
--
-log.h
-/home/dave/Documents/GitHub/GrblUtils/sender/log.h
-Utils.h
-/home/dave/Documents/GitHub/GrblUtils/sender/Utils.h
-DoubleObserver.h
-/home/dave/Documents/GitHub/GrblUtils/sender/DoubleObserver.h
-AxisNames.h
-/home/dave/Documents/GitHub/GrblUtils/sender/AxisNames.h
-SerialDataIo.h
-/home/dave/Documents/GitHub/GrblUtils/sender/SerialDataIo.h
-GrblRequest.h
-/home/dave/Documents/GitHub/GrblUtils/sender/GrblRequest.h
-GrblReply.h
-/home/dave/Documents/GitHub/GrblUtils/sender/GrblReply.h
-GrblReplyDispatcher.h
-/home/dave/Documents/GitHub/GrblUtils/sender/GrblReplyDispatcher.h
-GrblCommunicator.h
-/home/dave/Documents/GitHub/GrblUtils/sender/GrblCommunicator.h
-Replies/Status.h
-/home/dave/Documents/GitHub/GrblUtils/sender/Replies/Status.h
-StatusListener.h
-/home/dave/Documents/GitHub/GrblUtils/sender/StatusListener.h
 
 /home/dave/Documents/GitHub/GrblUtils/sender/StatusListener.h
 
@@ -227,6 +129,8 @@ Replies/Status.h
 /home/dave/Documents/GitHub/GrblUtils/sender/Replies/Status.h
 screen.h
 /home/dave/Documents/GitHub/GrblUtils/sender/screen.h
+input.h
+/home/dave/Documents/GitHub/GrblUtils/sender/input.h
 keyboard.h
 /home/dave/Documents/GitHub/GrblUtils/sender/keyboard.h
 OutputWindow.h

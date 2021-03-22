@@ -1,4 +1,5 @@
 #include "stdlib.h"
+#include "stdarg.h"
 #include <string>
 #include <vector>
 #include "Utils.h"
@@ -31,4 +32,14 @@ void logDumpData(uint8_t *data, int len){
         str += " " + to_hexstring(data[i]);
     }
     log(DEBUG, str + "\n");
+}
+
+void log_printf(LogMessageType lmt, const char *fmt, ...){
+    char msg[256];      // Must be big enough.  Don't overrun this.
+
+    va_list args;
+    va_start (args, fmt);
+    vsprintf (msg, fmt, args);
+    log(lmt, msg);
+    va_end (args);
 }

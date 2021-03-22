@@ -1,6 +1,12 @@
 #include <stdlib.h>
 #include <ncurses.h>
 #include <string>
+#include <vector>
+#include <memory>
+#include <optional>
+#include "log.h"
+#include "Utils.h"
+#include "input.h"
 #include "keyboard.h"
 
 const int UP_ARROW = 259;
@@ -13,86 +19,102 @@ const int HOME = 262;
 const int END = 360;
 
 
-Keyboard::Keyboard() {
+Keyboard::Keyboard(double increment) :  increment(increment){
     keypad(stdscr, TRUE);           // enable keyboard mapping 
     cbreak();                       // take input chars one at a time, no wait for \n 
     timeout(100);
     nodelay(stdscr, TRUE);
 }
 
-uint32_t Keyboard::Check() {
-    uint32_t rv = 0;
+Input::Changes Keyboard::Check() {
+    Input::Changes changes;
     int c;
 
     while((c = wgetch(stdscr)) != ERR) {
         switch(c) {
             case UP_ARROW:
-                rv |= KB_Y_INC;
+                changes.y = increment;
                 break;
             case DOWN_ARROW:
-                rv |= KB_Y_DEC;
+                changes.y = -increment;
                 break;
             case LEFT_ARROW:
-                rv |= KB_X_DEC;
+                changes.x = -increment;
                 break;
             case RIGHT_ARROW:
-                rv |= KB_X_INC;
+                changes.x = increment;
                 break;
             case HOME:
-                rv |= KB_Z_INC;
+                changes.z = increment;
                 break;
             case END:
-                rv |= KB_Z_DEC;
+                changes.z = -increment;
                 break;
             case PG_UP:
-                rv |= KB_A_INC;
+                changes.a = increment;
                 break;
             case PG_DOWN:
-                rv |= KB_A_DEC;
+                changes.a = -increment;
                 break;
             case '(':
-                rv |= KB_B_INC;
+                changes.b = -increment;
                 break;
             case ')':
-                rv |= KB_B_DEC;
+                changes.b = increment;
                 break;
             case '+':
-                rv |= KB_INC_INCREMENT;
+                log(DEBUG, "PLUS");
+                increase_increment();
                 break;
             case '-':
-                rv |= KB_INC_DECREMENT;
+                log(DEBUG, "MINUS");
+                decrease_increment();
                 break;
             case 'x':
-                rv |= KB_X_ZERO;
+                changes.events |= INPUT_X_ZERO;
                 break;
             case 'X':
-                rv |= KB_X_GOTO;
+                changes.events |= INPUT_X_GOTO;
                 break;
             case 'y':
-                rv |= KB_Y_ZERO;
+                changes.events |= INPUT_Y_ZERO;
                 break;
             case 'Y':
-                rv |= KB_Y_GOTO;
+                changes.events |= INPUT_Y_GOTO;
                 break;
             case 'z':
-                rv |= KB_Z_ZERO;
+                changes.events |= INPUT_Z_ZERO;
                 break;
             case 'Z':
-                rv |= KB_Z_GOTO;
+                changes.events |= INPUT_Z_GOTO;
                 break;
             case 'a':
-                rv |= KB_A_ZERO;
+                changes.events |= INPUT_A_ZERO;
                 break;
             case 'A':
-                rv |= KB_A_GOTO;
+                changes.events |= INPUT_A_GOTO;
                 break;
             case 'b':
-                rv |= KB_B_ZERO;
+                changes.events |= INPUT_B_ZERO;
                 break;
             case 'B':
-                rv |= KB_B_GOTO;
+                changes.events |= INPUT_B_GOTO;
                 break;
         }
     }
-    return rv;
+    return changes;
+}
+
+void Keyboard::increase_increment() {
+    log(DEBUG, "Increase Increment");
+    if(increment < 100) {
+        increment *= 10;
+    }
+}
+
+void Keyboard::decrease_increment() {
+    log(DEBUG, "Decrement");
+    if(increment > 0.001) {
+        increment /= 10;
+    }
 }

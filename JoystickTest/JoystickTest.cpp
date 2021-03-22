@@ -12,6 +12,7 @@
 
 #include <string>
 #include <vector>
+#include <optional>
 #include "Utils.h"
 #include <libevdev/libevdev.h>
 
@@ -86,49 +87,82 @@ void print_props(struct libevdev *dev)
 	}
 }
 
-int get_xbox_fd(const std::string &inputdir, std::vector<std::string> &detects, std::string &devname, struct libevdev * &evd){
-    const std::string prefix("event");
-    int rv = -1;
-    DIR *dir = opendir(inputdir.c_str());
+std::vector<std::string> ListDirectory(const std::string path) {
+    std::vector<std::string> rv;
 
+    DIR *dir = opendir(path.c_str());
     if(dir) {
         struct dirent *pDE = readdir(dir);
-
         while(pDE != NULL) {
-            std::string filename = std::string(pDE->d_name);
-            if(startswith(filename, prefix)){
-                std::string fullpath = inputdir + "/" + filename;
-                printf("Dir: %s\n", fullpath.c_str());
-
-                int fd = open(fullpath.c_str(), O_RDONLY|O_NONBLOCK);
-                if(fd > -1) {
-                    fcntl(fd, F_SETFD, O_NONBLOCK);
-                    struct libevdev *evdev = NULL;    
-                    int ret = libevdev_new_from_fd(fd, &evdev);
-                    if(ret > -1) {
-                        std::string devname(libevdev_get_name(evdev));
-                        printf("Input device name: \"%s\"\n", devname.c_str());
-                        for(auto detectstr : detects) {
-                            if(contains(devname, detectstr)) {
-                                printf("FOUND IT ******************!\n");
-                                print_bits(evdev);
-                                printf("\n\n");
-                                print_props(evdev);
-                                printf("\n\n");
-                                evd = evdev;
-                                devname = fullpath;
-                                return fd;
-                            }
-                        }
-                        libevdev_free(evdev);
-                    }
-                    close(fd);
-                }
-            }
+            rv.push_back(std::string(pDE->d_name));
             pDE = readdir(dir);
         }
     }
     return rv;
+}
+
+bool IsMatchingDevice(std::string filename, std::vector<std::string> &detectstrings) {
+    for(auto item : detectstrings) {
+        if(startswith(filename, item))
+            return true;
+    }
+    return false;
+}
+
+std::string PathJoin(std::string part1, std::string part2) {
+    if(!endswith(part1, "/") && !startswith(part2, "/"))
+        return part1 + "/" + part2; // Would be different in Windows.
+    return part1 + part2;
+}
+
+class DevInfo {
+public:
+    int fd;
+    struct libevdev *evdev;
+
+    DevInfo(int fd, struct libevdev *pEvd) : fd(fd), evdev(pEvd) {}
+};
+
+std::optional<DevInfo> IsDesiredDevice(const std::string fullpath, std::vector<std::string> detectstrings) {
+    int fd = open(fullpath.c_str(), O_RDONLY|O_NONBLOCK);
+    if(fd > -1) {
+        fcntl(fd, F_SETFD, O_NONBLOCK);
+        struct libevdev *evdev = NULL;    
+        int ret = libevdev_new_from_fd(fd, &evdev);
+        if(ret > -1) {
+            std::string devname(libevdev_get_name(evdev));
+            printf("Input device name: \"%s\"\n", devname.c_str());
+            for(auto detectstr : detectstrings) {
+                if(contains(devname, detectstr)) {
+                    printf("FOUND IT ******************!\n");
+                    print_bits(evdev);
+                    printf("\n\n");
+                    print_props(evdev);
+                    printf("\n\n");
+                    return std::optional<DevInfo>(DevInfo(fd, evdev));
+                }
+            }
+            libevdev_free(evdev);
+        }
+        close(fd);
+    }
+    return std::nullopt;
+}
+
+std::optional<DevInfo> get_xbox_fd(const std::string &inputdir, std::vector<std::string> &detectstrings){
+    std::vector<std::string> dirlist = ListDirectory(inputdir);
+    const std::string prefix("event");
+    
+     for(auto filename : dirlist) {
+        if(startswith(filename, prefix)){
+            std::string fullpath = PathJoin(inputdir, filename);
+            printf("Dir: %s\n", fullpath.c_str());
+            auto devinfo = IsDesiredDevice(fullpath, detectstrings);
+            if(devinfo)
+                return devinfo;
+        }
+    }
+    return std::nullopt;
 }
 
 bool WaitForReadable(int fd, int timeout) {
@@ -148,14 +182,13 @@ int main () {
         "Xbox One",
         "X-Box"
     };
-    std::string devicename;
 
-    struct libevdev * evdev = NULL;
-    int fd = get_xbox_fd(inputdir, detectstrings, devicename, evdev);
-    if(fd < 0) {
+    auto info = get_xbox_fd(inputdir, detectstrings);
+    if(!info) {
         printf("Couldn't find a device\n");
         exit(-1);
     }
+
 
     int sl_x = 0;
     int sl_y = 0;
@@ -179,11 +212,11 @@ int main () {
 
     bool must_sync = false;
     while (true) {
-        if(WaitForReadable(fd, 5000)){
+        if(WaitForReadable(info.value().fd, 5000)){
             int rv = -EAGAIN;
             while(rv == -EAGAIN) {
                 struct input_event ev; 
-                int rv = libevdev_next_event(evdev, must_sync ? LIBEVDEV_READ_FLAG_SYNC : LIBEVDEV_READ_FLAG_NORMAL, &ev);
+                int rv = libevdev_next_event(info.value().evdev, must_sync ? LIBEVDEV_READ_FLAG_SYNC : LIBEVDEV_READ_FLAG_NORMAL, &ev);
                 if(rv == LIBEVDEV_READ_STATUS_SUCCESS) {
                     switch (ev.type) {
                         case EV_ABS:

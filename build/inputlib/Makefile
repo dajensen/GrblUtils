@@ -144,6 +144,60 @@ inputlib/fast:
 	cd /home/dave/Documents/GitHub/GrblUtils/build && $(MAKE) $(MAKESILENT) -f inputlib/CMakeFiles/inputlib.dir/build.make inputlib/CMakeFiles/inputlib.dir/build
 .PHONY : inputlib/fast
 
+gamepad.o: gamepad.cpp.o
+
+.PHONY : gamepad.o
+
+# target to build an object file
+gamepad.cpp.o:
+	cd /home/dave/Documents/GitHub/GrblUtils/build && $(MAKE) $(MAKESILENT) -f inputlib/CMakeFiles/inputlib.dir/build.make inputlib/CMakeFiles/inputlib.dir/gamepad.cpp.o
+.PHONY : gamepad.cpp.o
+
+gamepad.i: gamepad.cpp.i
+
+.PHONY : gamepad.i
+
+# target to preprocess a source file
+gamepad.cpp.i:
+	cd /home/dave/Documents/GitHub/GrblUtils/build && $(MAKE) $(MAKESILENT) -f inputlib/CMakeFiles/inputlib.dir/build.make inputlib/CMakeFiles/inputlib.dir/gamepad.cpp.i
+.PHONY : gamepad.cpp.i
+
+gamepad.s: gamepad.cpp.s
+
+.PHONY : gamepad.s
+
+# target to generate assembly for a file
+gamepad.cpp.s:
+	cd /home/dave/Documents/GitHub/GrblUtils/build && $(MAKE) $(MAKESILENT) -f inputlib/CMakeFiles/inputlib.dir/build.make inputlib/CMakeFiles/inputlib.dir/gamepad.cpp.s
+.PHONY : gamepad.cpp.s
+
+input.o: input.cpp.o
+
+.PHONY : input.o
+
+# target to build an object file
+input.cpp.o:
+	cd /home/dave/Documents/GitHub/GrblUtils/build && $(MAKE) $(MAKESILENT) -f inputlib/CMakeFiles/inputlib.dir/build.make inputlib/CMakeFiles/inputlib.dir/input.cpp.o
+.PHONY : input.cpp.o
+
+input.i: input.cpp.i
+
+.PHONY : input.i
+
+# target to preprocess a source file
+input.cpp.i:
+	cd /home/dave/Documents/GitHub/GrblUtils/build && $(MAKE) $(MAKESILENT) -f inputlib/CMakeFiles/inputlib.dir/build.make inputlib/CMakeFiles/inputlib.dir/input.cpp.i
+.PHONY : input.cpp.i
+
+input.s: input.cpp.s
+
+.PHONY : input.s
+
+# target to generate assembly for a file
+input.cpp.s:
+	cd /home/dave/Documents/GitHub/GrblUtils/build && $(MAKE) $(MAKESILENT) -f inputlib/CMakeFiles/inputlib.dir/build.make inputlib/CMakeFiles/inputlib.dir/input.cpp.s
+.PHONY : input.cpp.s
+
 keyboard.o: keyboard.cpp.o
 
 .PHONY : keyboard.o
@@ -180,6 +234,12 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... inputlib"
+	@echo "... gamepad.o"
+	@echo "... gamepad.i"
+	@echo "... gamepad.s"
+	@echo "... input.o"
+	@echo "... input.i"
+	@echo "... input.s"
 	@echo "... keyboard.o"
 	@echo "... keyboard.i"
 	@echo "... keyboard.s"

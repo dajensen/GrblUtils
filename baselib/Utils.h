@@ -4,6 +4,7 @@ void delay(unsigned int millis);
 void dump_data(uint8_t *data, int len);
 bool verify_bytes(uint8_t *p1, uint8_t *p2, int len);
 bool startswith(std::string str, std::string key);      // Search the beginning of str for key
+bool endswith(std::string str, std::string key);
 bool contains(std::string str, std::string key);      // Search the beginning of str for key
 
 extern const std::string WHITESPACE;
@@ -15,3 +16,8 @@ std::string to_hexstring(uint8_t val);
 std::string to_hexstring(uint16_t val);
 std::string to_hexstring(uint32_t val);
 std::string to_hexstring(uint64_t val);
+
+std::string path_join(std::string part1, std::string part2);
+
+bool wait_until_readable(int fd, int timeout);
+std::vector<std::string> list_directory(const std::string path);

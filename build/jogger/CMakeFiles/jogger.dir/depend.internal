@@ -19,6 +19,21 @@ jogger/CMakeFiles/jogger.dir/InitStatusListener.cpp.o
  /home/dave/Documents/GitHub/GrblUtils/jogger/axis.h
  /home/dave/Documents/GitHub/GrblUtils/jogger/axisreport.h
  /home/dave/Documents/GitHub/GrblUtils/jogger/valuedisplay.h
+jogger/CMakeFiles/jogger.dir/JogTracker.cpp.o
+ ../baselib/DoubleObserver.h
+ ../baselib/Utils.h
+ ../baselib/log.h
+ ../seriallib/AxisNames.h
+ ../seriallib/GrblCommunicator.h
+ ../seriallib/GrblReply.h
+ ../seriallib/GrblRequest.h
+ ../seriallib/Replies/Status.h
+ ../seriallib/Requests/JogMessage.h
+ ../seriallib/Requests/OriginMessage.h
+ ../seriallib/SerialDataIo.h
+ /home/dave/Documents/GitHub/GrblUtils/jogger/JogTracker.cpp
+ /home/dave/Documents/GitHub/GrblUtils/jogger/JogTracker.h
+ /home/dave/Documents/GitHub/GrblUtils/jogger/axis.h
 jogger/CMakeFiles/jogger.dir/axis.cpp.o
  ../baselib/DoubleObserver.h
  ../baselib/Utils.h
@@ -45,6 +60,7 @@ jogger/CMakeFiles/jogger.dir/jogger.cpp.o
  ../baselib/OutputWindow.h
  ../baselib/Utils.h
  ../baselib/log.h
+ ../inputlib/input.h
  ../inputlib/keyboard.h
  ../screenlib/screen.h
  ../seriallib/AxisNames.h
@@ -52,6 +68,7 @@ jogger/CMakeFiles/jogger.dir/jogger.cpp.o
  ../seriallib/GrblReply.h
  ../seriallib/GrblReplyDispatcher.h
  ../seriallib/GrblRequest.h
+ ../seriallib/Replies/Empty.h
  ../seriallib/Replies/Status.h
  ../seriallib/Replies/Welcome.h
  ../seriallib/Requests/JogMessage.h
@@ -60,6 +77,7 @@ jogger/CMakeFiles/jogger.dir/jogger.cpp.o
  ../seriallib/Requests/WelcomeMessage.h
  ../seriallib/SerialDataIo.h
  /home/dave/Documents/GitHub/GrblUtils/jogger/InitStatusListener.h
+ /home/dave/Documents/GitHub/GrblUtils/jogger/JogTracker.h
  /home/dave/Documents/GitHub/GrblUtils/jogger/axis.h
  /home/dave/Documents/GitHub/GrblUtils/jogger/axisreport.h
  /home/dave/Documents/GitHub/GrblUtils/jogger/jogger.cpp

@@ -48,6 +48,7 @@ sender/CMakeFiles/sender.dir/sender.cpp.o: ../baselib/FileLogger.h
 sender/CMakeFiles/sender.dir/sender.cpp.o: ../baselib/OutputWindow.h
 sender/CMakeFiles/sender.dir/sender.cpp.o: ../baselib/Utils.h
 sender/CMakeFiles/sender.dir/sender.cpp.o: ../baselib/log.h
+sender/CMakeFiles/sender.dir/sender.cpp.o: ../inputlib/input.h
 sender/CMakeFiles/sender.dir/sender.cpp.o: ../inputlib/keyboard.h
 sender/CMakeFiles/sender.dir/sender.cpp.o: ../screenlib/screen.h
 sender/CMakeFiles/sender.dir/sender.cpp.o: ../seriallib/AxisNames.h

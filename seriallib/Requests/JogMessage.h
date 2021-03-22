@@ -1,8 +1,16 @@
 class JogMessage : public GrblRequest {
-    std::string axis;
+    std::vector<std::string> &axisvals;
     double loc;
     int feedrate;
 public:
-    JogMessage(std::string axis, double loc, int feedrate) : axis(axis), loc(loc), feedrate(feedrate) {}
-    virtual std::string write(){return "$J=" + axis + std::to_string(loc) + " F" + std::to_string(feedrate);}
+    JogMessage(std::vector<std::string> &axisvals, int feedrate) : axisvals(axisvals), loc(loc), feedrate(feedrate) {}
+    virtual std::string write() {
+        std::string msg = "$J=";
+        for(auto axisstr : axisvals) {
+            msg += axisstr;
+            msg += " ";
+        }
+        msg += "F" + std::to_string(feedrate);
+        return msg;
+    }
 };

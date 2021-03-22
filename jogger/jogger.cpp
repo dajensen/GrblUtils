@@ -34,6 +34,7 @@
 #include "Requests/OriginMessage.h"
 #include "Replies/Welcome.h"
 #include "Replies/Status.h"
+#include "Replies/Empty.h"
 
 #include "DoubleObserver.h"
 #include "axis.h"
@@ -42,9 +43,10 @@
 #include "InitStatusListener.h"
 #include "toppanel.h"
 #include "screen.h"
+#include "input.h"
 #include "keyboard.h"
 #include "OutputWindow.h"
-
+#include "JogTracker.h"
 
 
 bool get_options(int argc, char *argv[], std::string &portname) {
@@ -69,82 +71,59 @@ bool get_options(int argc, char *argv[], std::string &portname) {
 
 double increment = 1.0;
 
-void UpdateAxes(uint32_t kbmask, std::vector<Axis> &axis) {
-    if(kbmask & KB_X_INC){
-        axis[X].MoveBy(increment);
+void UpdateAxes(Input::Changes changes, std::vector<Axis> &axis) {
+    if(changes.x){
+        axis[X].ChangeBy(changes.x);
     }
-    if(kbmask & KB_X_DEC){
-        axis[X].MoveBy(-increment);
+    if(changes.y){
+        axis[Y].ChangeBy(changes.y);
     }
-    if(kbmask & KB_X_ZERO) {
-        axis[X].Zero();
+    if(changes.z){
+        axis[Z].ChangeBy(changes.z);
     }
-    if(kbmask & KB_X_GOTO) {
-        axis[X].GotoZero();
+    if(changes.a){
+        axis[A].ChangeBy(changes.a);
     }
-    if(kbmask & KB_Y_INC){
-        axis[Y].MoveBy(increment);
+    if(changes.b){
+        axis[B].ChangeBy(changes.b);
     }
-    if(kbmask & KB_Y_DEC){
-        axis[Y].MoveBy(-increment);
+    if(changes.events & INPUT_X_ZERO) {
+        log(DEBUG, "ZERO X");
+        axis[X].SetZero();
     }
-    if(kbmask & KB_Y_ZERO) {
-        axis[Y].Zero();
+    if(changes.events & INPUT_X_GOTO) {
+        log(DEBUG, "GOTO X");
+        axis[X].ChangeTo(0.0);
     }
-    if(kbmask & KB_Y_GOTO) {
-        axis[Y].GotoZero();
+    if(changes.events & INPUT_Y_ZERO) {
+        axis[Y].SetZero();
     }
-    if(kbmask & KB_Z_INC){
-        axis[Z].MoveBy(increment);
+    if(changes.events & INPUT_Y_GOTO) {
+        axis[Y].ChangeTo(0.0);
     }
-    if(kbmask & KB_Z_DEC){
-        axis[Z].MoveBy(-increment);
+    if(changes.events & INPUT_Z_ZERO) {
+        axis[Z].SetZero();
     }
-    if(kbmask & KB_Z_ZERO) {
-        axis[Z].Zero();
+    if(changes.events & INPUT_Z_GOTO) {
+        axis[Z].ChangeTo(0.0);
     }
-    if(kbmask & KB_Z_GOTO) {
-        axis[Z].GotoZero();
+    if(changes.events & INPUT_A_ZERO) {
+        axis[A].SetZero();
     }
-    if(kbmask & KB_A_INC){
-        axis[A].MoveBy(increment);
+    if(changes.events & INPUT_A_GOTO) {
+        axis[A].ChangeTo(0.0);
     }
-    if(kbmask & KB_A_DEC){
-        axis[A].MoveBy(-increment);
+    if(changes.events & INPUT_B_ZERO) {
+        axis[B].SetZero();
     }
-    if(kbmask & KB_A_ZERO) {
-        axis[A].Zero();
-    }
-    if(kbmask & KB_A_GOTO) {
-        axis[A].GotoZero();
-    }
-    if(kbmask & KB_B_INC){
-        axis[B].MoveBy(increment);
-    }
-    if(kbmask & KB_B_DEC){
-        axis[B].MoveBy(-increment);
-    }
-    if(kbmask & KB_B_ZERO) {
-        axis[B].Zero();
-    }
-    if(kbmask & KB_B_GOTO) {
-        axis[B].GotoZero();
-    }
-    if(kbmask & KB_INC_INCREMENT){
-        if(increment < 100) {
-            increment *= 10;
-        }
-    }
-    if(kbmask & KB_INC_DECREMENT){
-        if(increment > 0.001) {
-            increment /= 10;
-        }
+    if(changes.events & INPUT_B_GOTO) {
+        axis[B].ChangeTo(0.0);
     }
 }
 
 void LogFn(LogMessageType lmt, std::string msg) {
     FileLogger::Log(lmt, msg);
-    OutputWindow::Log(lmt, msg);    
+        OutputWindow::Log(lmt, msg);    
 }
 
 const int INIT_TIMEOUT = 5000;
@@ -213,50 +192,47 @@ int main(int argc, char *argv[]){
     Screen screen(screen_notifier);
 
     OutputWindow *pOutputWin = OutputWindow::GetInstance(stdscr, "Output", COLOR_PAIR(3), 
-                                        AxisReport::WIN_HEIGHT, 0, screen.GetCols(), screen.GetRows() - AxisReport::WIN_HEIGHT);
-    Keyboard keyboard;
+                        AxisReport::WIN_HEIGHT, 0, screen.GetCols(), screen.GetRows() - AxisReport::WIN_HEIGHT);
+    Input *pInput = Input::CreateInstance();
+ 
     WelcomeMessage welcome;
     comm.SendRequest(welcome);
 
     StatusQueryMessage query;
     comm.SendRequest(query);
 
-    TopPanel toppanel(stdscr, COLOR_PAIR(2), 0, 0, screen.GetCols());
-    dispatcher.RegisterMessageType(StatusReply::Recognized, StatusReply::CreateInstance, toppanel);
-
     // An array of Axis objects.  They hold the values of each axis and are observable.
     std::vector<Axis> axis;
     for(int i = 0; i < AxisNames::NUM_AXES; i++){
         axis.emplace_back(NameToString((AxisNames)i), comm);
     }
+
+    TopPanel toppanel(stdscr, COLOR_PAIR(2), 0, 0, screen.GetCols());
     toppanel.SetAxes(axis);
+    dispatcher.RegisterMessageType(StatusReply::Recognized, StatusReply::CreateInstance, toppanel);
+
+    JogTracker jogtracker(comm);
+    for(int i = 0; i < AxisNames::NUM_AXES; i++){
+        jogtracker.SetAxis((AxisNames)i, *(DoubleObservable *)&axis[i]);
+    }
+    dispatcher.RegisterMessageType(EmptyReply::Recognized, EmptyReply::CreateInstance, jogtracker);
+
     // Initialize each axis with the observers in place
     for(int i = 0; i < NUM_AXES; i++){
         axis[i].ChangeTo(initial_values[i]);
     }
 
     unsigned long last_status_time = millis();
-    uint32_t prev_keymask  = 0;
     while(true) {
-        uint32_t kbmask = keyboard.Check();
-        if(kbmask){
-           UpdateAxes(kbmask, axis);
-        }
-        else {
-            if(prev_keymask) {
-                // This should do an immediate cancel, but it seems to have side effects, like making future jog messages fail.
-                // So don't do it for now.
-                // comm.SendByte(0x85);
-            }
-        }
-        prev_keymask = kbmask;
+        Input::Changes changes = pInput->Check();
+        UpdateAxes(changes, axis);
 
         comm.CheckIncomingMessages();
 
         // Delay until a bit of time has passed - probably don't need to check these things more than every 10 to 100 ms.
         delay(50);
 
-        if(millis() - last_status_time > 250){
+        if(millis() - last_status_time > 2500){
             comm.SendRequest(query);
             last_status_time = millis();
         }

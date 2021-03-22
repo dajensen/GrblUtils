@@ -5,6 +5,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
   "/home/dave/Documents/GitHub/GrblUtils/jogger/InitStatusListener.cpp" "/home/dave/Documents/GitHub/GrblUtils/build/jogger/CMakeFiles/jogger.dir/InitStatusListener.cpp.o"
+  "/home/dave/Documents/GitHub/GrblUtils/jogger/JogTracker.cpp" "/home/dave/Documents/GitHub/GrblUtils/build/jogger/CMakeFiles/jogger.dir/JogTracker.cpp.o"
   "/home/dave/Documents/GitHub/GrblUtils/jogger/axis.cpp" "/home/dave/Documents/GitHub/GrblUtils/build/jogger/CMakeFiles/jogger.dir/axis.cpp.o"
   "/home/dave/Documents/GitHub/GrblUtils/jogger/axisreport.cpp" "/home/dave/Documents/GitHub/GrblUtils/build/jogger/CMakeFiles/jogger.dir/axisreport.cpp.o"
   "/home/dave/Documents/GitHub/GrblUtils/jogger/jogger.cpp" "/home/dave/Documents/GitHub/GrblUtils/build/jogger/CMakeFiles/jogger.dir/jogger.cpp.o"
@@ -23,6 +24,8 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "../seriallib/../baselib"
   "../screenlib"
   "../inputlib"
+  "../inputlib/../baselib"
+  "/usr/include/libevdev-1.0"
   "../baselib"
   )
 

@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/dave/Documents/GitHub/GrblUtils/sender/seriallib -I/home/dave/Documents/GitHub/GrblUtils/sender/screenlib -I/home/dave/Documents/GitHub/GrblUtils/sender/inputlib -I/home/dave/Documents/GitHub/GrblUtils/sender/baselib -I/home/dave/Documents/GitHub/GrblUtils/seriallib -I/home/dave/Documents/GitHub/GrblUtils/seriallib/../baselib -I/home/dave/Documents/GitHub/GrblUtils/screenlib -I/home/dave/Documents/GitHub/GrblUtils/inputlib -I/home/dave/Documents/GitHub/GrblUtils/baselib
+CXX_INCLUDES = -I/home/dave/Documents/GitHub/GrblUtils/sender/seriallib -I/home/dave/Documents/GitHub/GrblUtils/sender/screenlib -I/home/dave/Documents/GitHub/GrblUtils/sender/inputlib -I/home/dave/Documents/GitHub/GrblUtils/sender/baselib -I/home/dave/Documents/GitHub/GrblUtils/seriallib -I/home/dave/Documents/GitHub/GrblUtils/seriallib/../baselib -I/home/dave/Documents/GitHub/GrblUtils/screenlib -I/home/dave/Documents/GitHub/GrblUtils/inputlib -I/home/dave/Documents/GitHub/GrblUtils/inputlib/../baselib -I/usr/include/libevdev-1.0 -I/home/dave/Documents/GitHub/GrblUtils/baselib
 
 CXX_FLAGS = -std=gnu++14
 

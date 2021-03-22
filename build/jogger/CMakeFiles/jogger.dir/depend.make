@@ -19,6 +19,21 @@ jogger/CMakeFiles/jogger.dir/InitStatusListener.cpp.o: ../jogger/axis.h
 jogger/CMakeFiles/jogger.dir/InitStatusListener.cpp.o: ../jogger/axisreport.h
 jogger/CMakeFiles/jogger.dir/InitStatusListener.cpp.o: ../jogger/valuedisplay.h
 
+jogger/CMakeFiles/jogger.dir/JogTracker.cpp.o: ../baselib/DoubleObserver.h
+jogger/CMakeFiles/jogger.dir/JogTracker.cpp.o: ../baselib/Utils.h
+jogger/CMakeFiles/jogger.dir/JogTracker.cpp.o: ../baselib/log.h
+jogger/CMakeFiles/jogger.dir/JogTracker.cpp.o: ../seriallib/AxisNames.h
+jogger/CMakeFiles/jogger.dir/JogTracker.cpp.o: ../seriallib/GrblCommunicator.h
+jogger/CMakeFiles/jogger.dir/JogTracker.cpp.o: ../seriallib/GrblReply.h
+jogger/CMakeFiles/jogger.dir/JogTracker.cpp.o: ../seriallib/GrblRequest.h
+jogger/CMakeFiles/jogger.dir/JogTracker.cpp.o: ../seriallib/Replies/Status.h
+jogger/CMakeFiles/jogger.dir/JogTracker.cpp.o: ../seriallib/Requests/JogMessage.h
+jogger/CMakeFiles/jogger.dir/JogTracker.cpp.o: ../seriallib/Requests/OriginMessage.h
+jogger/CMakeFiles/jogger.dir/JogTracker.cpp.o: ../seriallib/SerialDataIo.h
+jogger/CMakeFiles/jogger.dir/JogTracker.cpp.o: ../jogger/JogTracker.cpp
+jogger/CMakeFiles/jogger.dir/JogTracker.cpp.o: ../jogger/JogTracker.h
+jogger/CMakeFiles/jogger.dir/JogTracker.cpp.o: ../jogger/axis.h
+
 jogger/CMakeFiles/jogger.dir/axis.cpp.o: ../baselib/DoubleObserver.h
 jogger/CMakeFiles/jogger.dir/axis.cpp.o: ../baselib/Utils.h
 jogger/CMakeFiles/jogger.dir/axis.cpp.o: ../baselib/log.h
@@ -44,6 +59,7 @@ jogger/CMakeFiles/jogger.dir/jogger.cpp.o: ../baselib/FileLogger.h
 jogger/CMakeFiles/jogger.dir/jogger.cpp.o: ../baselib/OutputWindow.h
 jogger/CMakeFiles/jogger.dir/jogger.cpp.o: ../baselib/Utils.h
 jogger/CMakeFiles/jogger.dir/jogger.cpp.o: ../baselib/log.h
+jogger/CMakeFiles/jogger.dir/jogger.cpp.o: ../inputlib/input.h
 jogger/CMakeFiles/jogger.dir/jogger.cpp.o: ../inputlib/keyboard.h
 jogger/CMakeFiles/jogger.dir/jogger.cpp.o: ../screenlib/screen.h
 jogger/CMakeFiles/jogger.dir/jogger.cpp.o: ../seriallib/AxisNames.h
@@ -51,6 +67,7 @@ jogger/CMakeFiles/jogger.dir/jogger.cpp.o: ../seriallib/GrblCommunicator.h
 jogger/CMakeFiles/jogger.dir/jogger.cpp.o: ../seriallib/GrblReply.h
 jogger/CMakeFiles/jogger.dir/jogger.cpp.o: ../seriallib/GrblReplyDispatcher.h
 jogger/CMakeFiles/jogger.dir/jogger.cpp.o: ../seriallib/GrblRequest.h
+jogger/CMakeFiles/jogger.dir/jogger.cpp.o: ../seriallib/Replies/Empty.h
 jogger/CMakeFiles/jogger.dir/jogger.cpp.o: ../seriallib/Replies/Status.h
 jogger/CMakeFiles/jogger.dir/jogger.cpp.o: ../seriallib/Replies/Welcome.h
 jogger/CMakeFiles/jogger.dir/jogger.cpp.o: ../seriallib/Requests/JogMessage.h
@@ -59,6 +76,7 @@ jogger/CMakeFiles/jogger.dir/jogger.cpp.o: ../seriallib/Requests/StatusQueryMess
 jogger/CMakeFiles/jogger.dir/jogger.cpp.o: ../seriallib/Requests/WelcomeMessage.h
 jogger/CMakeFiles/jogger.dir/jogger.cpp.o: ../seriallib/SerialDataIo.h
 jogger/CMakeFiles/jogger.dir/jogger.cpp.o: ../jogger/InitStatusListener.h
+jogger/CMakeFiles/jogger.dir/jogger.cpp.o: ../jogger/JogTracker.h
 jogger/CMakeFiles/jogger.dir/jogger.cpp.o: ../jogger/axis.h
 jogger/CMakeFiles/jogger.dir/jogger.cpp.o: ../jogger/axisreport.h
 jogger/CMakeFiles/jogger.dir/jogger.cpp.o: ../jogger/jogger.cpp

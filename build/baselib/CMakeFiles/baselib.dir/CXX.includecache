@@ -30,57 +30,7 @@ FileLogger.h
 
 /home/dave/Documents/GitHub/GrblUtils/baselib/FileLogger.h
 
-/home/dave/Documents/GitHub/GrblUtils/baselib/OutputWindow.cpp
-stdlib.h
--
-ncurses.h
--
-string
--
-vector
--
-Utils.h
 /home/dave/Documents/GitHub/GrblUtils/baselib/Utils.h
-OutputWindow.h
-/home/dave/Documents/GitHub/GrblUtils/baselib/OutputWindow.h
-
-/home/dave/Documents/GitHub/GrblUtils/baselib/OutputWindow.h
-log.h
-/home/dave/Documents/GitHub/GrblUtils/baselib/log.h
-
-/home/dave/Documents/GitHub/GrblUtils/baselib/Utils.cpp
-stdio.h
--
-unistd.h
--
-string
--
-sstream
--
-iomanip
--
-sstream
--
-iostream
--
-vector
--
-Utils.h
-/home/dave/Documents/GitHub/GrblUtils/baselib/Utils.h
-
-/home/dave/Documents/GitHub/GrblUtils/baselib/Utils.h
-
-/home/dave/Documents/GitHub/GrblUtils/baselib/log.cpp
-stdlib.h
-/home/dave/Documents/GitHub/GrblUtils/baselib/stdlib.h
-string
--
-vector
--
-Utils.h
-/home/dave/Documents/GitHub/GrblUtils/baselib/Utils.h
-log.h
-/home/dave/Documents/GitHub/GrblUtils/baselib/log.h
 
 /home/dave/Documents/GitHub/GrblUtils/baselib/log.h
 

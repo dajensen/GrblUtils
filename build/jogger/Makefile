@@ -171,6 +171,33 @@ InitStatusListener.cpp.s:
 	cd /home/dave/Documents/GitHub/GrblUtils/build && $(MAKE) $(MAKESILENT) -f jogger/CMakeFiles/jogger.dir/build.make jogger/CMakeFiles/jogger.dir/InitStatusListener.cpp.s
 .PHONY : InitStatusListener.cpp.s
 
+JogTracker.o: JogTracker.cpp.o
+
+.PHONY : JogTracker.o
+
+# target to build an object file
+JogTracker.cpp.o:
+	cd /home/dave/Documents/GitHub/GrblUtils/build && $(MAKE) $(MAKESILENT) -f jogger/CMakeFiles/jogger.dir/build.make jogger/CMakeFiles/jogger.dir/JogTracker.cpp.o
+.PHONY : JogTracker.cpp.o
+
+JogTracker.i: JogTracker.cpp.i
+
+.PHONY : JogTracker.i
+
+# target to preprocess a source file
+JogTracker.cpp.i:
+	cd /home/dave/Documents/GitHub/GrblUtils/build && $(MAKE) $(MAKESILENT) -f jogger/CMakeFiles/jogger.dir/build.make jogger/CMakeFiles/jogger.dir/JogTracker.cpp.i
+.PHONY : JogTracker.cpp.i
+
+JogTracker.s: JogTracker.cpp.s
+
+.PHONY : JogTracker.s
+
+# target to generate assembly for a file
+JogTracker.cpp.s:
+	cd /home/dave/Documents/GitHub/GrblUtils/build && $(MAKE) $(MAKESILENT) -f jogger/CMakeFiles/jogger.dir/build.make jogger/CMakeFiles/jogger.dir/JogTracker.cpp.s
+.PHONY : JogTracker.cpp.s
+
 axis.o: axis.cpp.o
 
 .PHONY : axis.o
@@ -318,6 +345,9 @@ help:
 	@echo "... InitStatusListener.o"
 	@echo "... InitStatusListener.i"
 	@echo "... InitStatusListener.s"
+	@echo "... JogTracker.o"
+	@echo "... JogTracker.i"
+	@echo "... JogTracker.s"
 	@echo "... axis.o"
 	@echo "... axis.i"
 	@echo "... axis.s"

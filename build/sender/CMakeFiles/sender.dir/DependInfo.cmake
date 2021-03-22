@@ -22,6 +22,8 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "../seriallib/../baselib"
   "../screenlib"
   "../inputlib"
+  "../inputlib/../baselib"
+  "/usr/include/libevdev-1.0"
   "../baselib"
   )
 

@@ -76,9 +76,22 @@ include inputlib/CMakeFiles/inputlib.dir/progress.make
 # Include the compile flags for this target's objects.
 include inputlib/CMakeFiles/inputlib.dir/flags.make
 
+inputlib/CMakeFiles/inputlib.dir/input.cpp.o: inputlib/CMakeFiles/inputlib.dir/flags.make
+inputlib/CMakeFiles/inputlib.dir/input.cpp.o: ../inputlib/input.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dave/Documents/GitHub/GrblUtils/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object inputlib/CMakeFiles/inputlib.dir/input.cpp.o"
+	cd /home/dave/Documents/GitHub/GrblUtils/build/inputlib && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/inputlib.dir/input.cpp.o -c /home/dave/Documents/GitHub/GrblUtils/inputlib/input.cpp
+
+inputlib/CMakeFiles/inputlib.dir/input.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/inputlib.dir/input.cpp.i"
+	cd /home/dave/Documents/GitHub/GrblUtils/build/inputlib && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/dave/Documents/GitHub/GrblUtils/inputlib/input.cpp > CMakeFiles/inputlib.dir/input.cpp.i
+
+inputlib/CMakeFiles/inputlib.dir/input.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/inputlib.dir/input.cpp.s"
+	cd /home/dave/Documents/GitHub/GrblUtils/build/inputlib && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/dave/Documents/GitHub/GrblUtils/inputlib/input.cpp -o CMakeFiles/inputlib.dir/input.cpp.s
+
 inputlib/CMakeFiles/inputlib.dir/keyboard.cpp.o: inputlib/CMakeFiles/inputlib.dir/flags.make
 inputlib/CMakeFiles/inputlib.dir/keyboard.cpp.o: ../inputlib/keyboard.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dave/Documents/GitHub/GrblUtils/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object inputlib/CMakeFiles/inputlib.dir/keyboard.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dave/Documents/GitHub/GrblUtils/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object inputlib/CMakeFiles/inputlib.dir/keyboard.cpp.o"
 	cd /home/dave/Documents/GitHub/GrblUtils/build/inputlib && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/inputlib.dir/keyboard.cpp.o -c /home/dave/Documents/GitHub/GrblUtils/inputlib/keyboard.cpp
 
 inputlib/CMakeFiles/inputlib.dir/keyboard.cpp.i: cmake_force
@@ -89,17 +102,34 @@ inputlib/CMakeFiles/inputlib.dir/keyboard.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/inputlib.dir/keyboard.cpp.s"
 	cd /home/dave/Documents/GitHub/GrblUtils/build/inputlib && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/dave/Documents/GitHub/GrblUtils/inputlib/keyboard.cpp -o CMakeFiles/inputlib.dir/keyboard.cpp.s
 
+inputlib/CMakeFiles/inputlib.dir/gamepad.cpp.o: inputlib/CMakeFiles/inputlib.dir/flags.make
+inputlib/CMakeFiles/inputlib.dir/gamepad.cpp.o: ../inputlib/gamepad.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dave/Documents/GitHub/GrblUtils/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object inputlib/CMakeFiles/inputlib.dir/gamepad.cpp.o"
+	cd /home/dave/Documents/GitHub/GrblUtils/build/inputlib && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/inputlib.dir/gamepad.cpp.o -c /home/dave/Documents/GitHub/GrblUtils/inputlib/gamepad.cpp
+
+inputlib/CMakeFiles/inputlib.dir/gamepad.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/inputlib.dir/gamepad.cpp.i"
+	cd /home/dave/Documents/GitHub/GrblUtils/build/inputlib && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/dave/Documents/GitHub/GrblUtils/inputlib/gamepad.cpp > CMakeFiles/inputlib.dir/gamepad.cpp.i
+
+inputlib/CMakeFiles/inputlib.dir/gamepad.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/inputlib.dir/gamepad.cpp.s"
+	cd /home/dave/Documents/GitHub/GrblUtils/build/inputlib && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/dave/Documents/GitHub/GrblUtils/inputlib/gamepad.cpp -o CMakeFiles/inputlib.dir/gamepad.cpp.s
+
 # Object files for target inputlib
 inputlib_OBJECTS = \
-"CMakeFiles/inputlib.dir/keyboard.cpp.o"
+"CMakeFiles/inputlib.dir/input.cpp.o" \
+"CMakeFiles/inputlib.dir/keyboard.cpp.o" \
+"CMakeFiles/inputlib.dir/gamepad.cpp.o"
 
 # External object files for target inputlib
 inputlib_EXTERNAL_OBJECTS =
 
+inputlib/libinputlib.a: inputlib/CMakeFiles/inputlib.dir/input.cpp.o
 inputlib/libinputlib.a: inputlib/CMakeFiles/inputlib.dir/keyboard.cpp.o
+inputlib/libinputlib.a: inputlib/CMakeFiles/inputlib.dir/gamepad.cpp.o
 inputlib/libinputlib.a: inputlib/CMakeFiles/inputlib.dir/build.make
 inputlib/libinputlib.a: inputlib/CMakeFiles/inputlib.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/dave/Documents/GitHub/GrblUtils/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX static library libinputlib.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/dave/Documents/GitHub/GrblUtils/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX static library libinputlib.a"
 	cd /home/dave/Documents/GitHub/GrblUtils/build/inputlib && $(CMAKE_COMMAND) -P CMakeFiles/inputlib.dir/cmake_clean_target.cmake
 	cd /home/dave/Documents/GitHub/GrblUtils/build/inputlib && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/inputlib.dir/link.txt --verbose=$(VERBOSE)
 

@@ -9,6 +9,14 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 find_package(Curses REQUIRED)
 
+find_package (PkgConfig REQUIRED)
+pkg_check_modules(LIBEVDEV REQUIRED IMPORTED_TARGET libevdev)
+if(LIBEVDEV_FOUND)
+        message(STATUS "libevdev found")
+        message(STATUS "libevdev includes: ${LIBEVDEV_INCLUDE_DIRS}")
+endif()
+
+
 list(APPEND EXTRA_INCLUDES ${CURSES_INCLUDE_DIR})
 list(APPEND EXTRA_INCLUDES seriallib)
 list(APPEND EXTRA_INCLUDES screenlib)
@@ -20,6 +28,7 @@ list(APPEND EXTRA_LIBS seriallib)
 list(APPEND EXTRA_LIBS screenlib)
 list(APPEND EXTRA_LIBS inputlib)
 list(APPEND EXTRA_LIBS baselib)
+list(APPEND EXTRA_LIBS ${LIBEVDEV_LIBRARIES})
 
 # add the executable target
 add_executable(sender 

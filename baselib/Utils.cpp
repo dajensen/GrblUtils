@@ -1,5 +1,8 @@
 #include <stdio.h>
 #include <unistd.h>
+#include <poll.h>
+#include <dirent.h>
+
 #include <string>
 #include <sstream>
 #include <iomanip>
@@ -43,6 +46,10 @@ bool verify_bytes(uint8_t *p1, uint8_t *p2, int len) {
 bool startswith(std::string str, std::string key) {
     // A nice answer from here: https://stackoverflow.com/questions/1878001/how-do-i-check-if-a-c-stdstring-starts-with-a-certain-string-and-convert-a
     return str.rfind(key, 0) == 0;
+}
+
+bool endswith(std::string str, std::string key) {
+    return str.compare (str.length() - key.length(), key.length(), key) == 0;
 }
 
 bool contains(std::string str, std::string key) {
@@ -100,3 +107,34 @@ std::string to_hexstring(uint64_t val) {
     sprintf(str, "0x%16lx", val);
     return std::string(str);
 }
+
+std::string path_join(std::string part1, std::string part2) {
+    if(!endswith(part1, "/") && !startswith(part2, "/"))
+        return part1 + "/" + part2; // Would be different in Windows.
+    return part1 + part2;
+}
+
+bool wait_until_readable(int fd, int timeout) {
+    
+    struct pollfd pfd;
+    pfd.fd = fd;
+    pfd.events = POLLIN;
+
+    int rv = poll(&pfd, 1, timeout);
+    return rv > 0;
+}
+
+std::vector<std::string> list_directory(const std::string path) {
+    std::vector<std::string> rv;
+
+    DIR *dir = opendir(path.c_str());
+    if(dir) {
+        struct dirent *pDE = readdir(dir);
+        while(pDE != NULL) {
+            rv.push_back(std::string(pDE->d_name));
+            pDE = readdir(dir);
+        }
+    }
+    return rv;
+}
+

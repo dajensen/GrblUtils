@@ -49,6 +49,7 @@ sender/CMakeFiles/sender.dir/sender.cpp.o
  ../baselib/OutputWindow.h
  ../baselib/Utils.h
  ../baselib/log.h
+ ../inputlib/input.h
  ../inputlib/keyboard.h
  ../screenlib/screen.h
  ../seriallib/AxisNames.h

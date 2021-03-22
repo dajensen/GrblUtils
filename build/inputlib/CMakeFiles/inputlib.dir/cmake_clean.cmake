@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/inputlib.dir/gamepad.cpp.o"
+  "CMakeFiles/inputlib.dir/input.cpp.o"
   "CMakeFiles/inputlib.dir/keyboard.cpp.o"
   "libinputlib.a"
   "libinputlib.pdb"

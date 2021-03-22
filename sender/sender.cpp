@@ -39,6 +39,7 @@
 #include "Replies/Status.h"
 
 #include "screen.h"
+#include "input.h"
 #include "keyboard.h"
 #include "OutputWindow.h"
 #include "EmptyListener.h"
@@ -140,7 +141,7 @@ int main(int argc, char *argv[]){
     std::shared_ptr<Screen::ReinitNotifier> screen_notifier = std::make_shared<Screen::ReinitNotifier>();
     Screen screen(screen_notifier);
     OutputWindow *pOutputWin = OutputWindow::GetInstance(stdscr, "Output", COLOR_PAIR(3), 0, 0, screen.GetCols(), screen.GetRows());
-    Keyboard keyboard;
+    Input *pInput = Input::CreateInstance();
 
     bool status_received = false;
     StatusListener statuslistener(status_received);
