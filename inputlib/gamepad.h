@@ -21,8 +21,6 @@ class Gamepad : public Input {
     int btn_mode = 0;
     bool must_sync = false;
 
-    static constexpr int JOYSTICK_THRESHOLD = 1500;
-
     class DevInfo {
     public:
         int fd;
@@ -42,8 +40,8 @@ class Gamepad : public Input {
     void print_status();
 
     int find_greatest(std::vector<int> vals);
-    int calc_speed(int joystick_val);
-    double scale_value(int val);
+    int scale_value(int joystick_val);
+    double calc_travel_distance(int val, uint32_t feedrate, unsigned long ms_elapsed);
     uint32_t update_event_mask(uint16_t event, uint16_t value);
 
 public:

@@ -232,7 +232,7 @@ int main(int argc, char *argv[]){
         // Delay until a bit of time has passed - probably don't need to check these things more than every 10 to 100 ms.
         delay(50);
 
-        if(millis() - last_status_time > 2500){
+        if(millis() - last_status_time > 250){
             comm.SendRequest(query);
             last_status_time = millis();
         }

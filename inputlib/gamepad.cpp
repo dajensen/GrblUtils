@@ -172,27 +172,35 @@ Gamepad::Gamepad() {
     }
 }
 
-int Gamepad::calc_speed(int joystick_val) {
-    if(joystick_val < 5000)
-        return false;
-    return (int)(4000.0 * pow(joystick_val - 5000.0, 2.0) / 771006289.0);    
+int Gamepad::scale_value(int joystick_val) {
+    int absval = abs(joystick_val);
+    if(abs(absval) < 5000)
+        return 0;
+    int rv = (int)(4000.0 * pow(absval - 5000.0, 2.0) / 771006289.0);    
+    return joystick_val > 0 ? rv : -rv;
 }
 
-double Gamepad::scale_value(int val) {
-    if(val > JOYSTICK_THRESHOLD) {
-        return 1;                       // Calculate how far you could have traveled since last poll at max speed, and go that far.
-    }
-    else if(val < -JOYSTICK_THRESHOLD) {
-        return -1;
-    }
-    return 0;
+double Gamepad::calc_travel_distance(int val, uint32_t feedrate, unsigned long ms_elapsed) {
+    if(feedrate == 0)
+        return 0.0;
+
+    // You know how many ms elapsed between calls (last time), which we'll guess is the same amount of time that will elapse between this call and the next.
+    // That's looking accurate to about 1 ms on my laptop.
+    // So, you know how fast you want to go (feedrate is in ms/min)
+    // The trick is to calculate how far to expect to travel in that amount of time.
+    static constexpr int MS_PER_MINUTE = 60 * 1000;
+
+    double distance = (double)feedrate * ms_elapsed / MS_PER_MINUTE;
+    double rv = distance * val / feedrate;
+    return rv;
 }
 
 int Gamepad::find_greatest(std::vector<int> vals) {
     int rv = 0;
     for( auto val : vals){
-        if(val > rv)
-            rv = val;
+        int absval = abs(val);
+        if(absval > rv)
+            rv = absval;
     }
     return rv;
 }
@@ -226,6 +234,7 @@ Input::Changes Gamepad::Check() {
     int ret = 0;
     static unsigned long prevtime = 0;
     unsigned long newtime = millis();
+    unsigned long elapsed = newtime - prevtime;
 
 //    if(prevtime > 0)
 //        log(DEBUG, "Betwen polling: " + std::to_string(newtime - prevtime));
@@ -264,7 +273,7 @@ Input::Changes Gamepad::Check() {
                     break;
             }
             if(ev.type != EV_SYN) {
-                print_status();
+//                print_status();
             }
         }
         else if(ret == LIBEVDEV_READ_STATUS_SYNC) {
@@ -273,13 +282,14 @@ Input::Changes Gamepad::Check() {
         }
     }
 
-    changes.feedrate = calc_speed(find_greatest(std::vector<int>{sr_x, sr_y, sl_x, sl_y}));
-    log(DEBUG, std::to_string(changes.feedrate));
-    changes.x = scale_value(sr_x);
-    changes.y = -scale_value(sr_y);  // Y axis is inverted on the gamepad
-    changes.z = -scale_value(sl_y);  // Y axis is inverted on the gamepad
-    changes.a = scale_value(sl_x);
+    int greatest_change = scale_value(find_greatest(std::vector<int>{sr_x, sr_y, sl_x, sl_y}));
+    changes.feedrate = abs(greatest_change);
+    changes.x = calc_travel_distance(scale_value(sr_x), greatest_change, elapsed);
+    changes.y = calc_travel_distance(scale_value(-sr_y), changes.feedrate, elapsed);  // Y axis is inverted on the gamepad
+    changes.z = calc_travel_distance(scale_value(-sl_y), changes.feedrate, elapsed) / 16;  // Y axis is inverted on the gamepad, and must be slower!
+    changes.a = calc_travel_distance(scale_value(sl_x), changes.feedrate, elapsed);
 
+ //   log(DEBUG, "X change: " + std::to_string(changes.x));
     must_sync = false;
     prevtime = newtime;
     return changes;
