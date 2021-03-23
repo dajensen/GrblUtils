@@ -13,6 +13,7 @@
 #include "GcodeCommunicator.h"
 
 
+#ifdef RISKY_SENDER
 bool GcodeCommunicator::SendLine(std::string str) {
     bool rv = false;
     std::string to_send = str + "\n"; 
@@ -42,3 +43,29 @@ bool GcodeCommunicator::MarkLineReceived() {
 //    log(DEBUG, "Bytes in buffer: " + std::to_string(buffer_used));
     return rv;
 }
+
+#else
+
+// This is the slower, but simpler and more reliable approach
+
+bool GcodeCommunicator::SendLine(std::string str) {
+    bool rv = false;
+    std::string to_send = str + "\n"; 
+
+    if(!buffer_used){
+        log(TO_GRBL, to_send);
+        int sendlen = io.Write((uint8_t *)to_send.c_str(), to_send.length());
+        buffer_used = 1;
+        rv = sendlen == to_send.length();
+    }
+
+    return rv;
+}
+
+bool GcodeCommunicator::MarkLineReceived() {
+    bool rv = true;
+    buffer_used = 0;
+    return rv;
+}
+
+#endif

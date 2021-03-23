@@ -136,7 +136,7 @@ int main(int argc, char *argv[]){
     GcodeCommunicator comm(SerialDataIo, dispatcher);
     RegisterForSigInt(comm);
 
-    delay(1000);
+    delay(2000);
 
     std::shared_ptr<Screen::ReinitNotifier> screen_notifier = std::make_shared<Screen::ReinitNotifier>();
     Screen screen(screen_notifier);
@@ -152,6 +152,8 @@ int main(int argc, char *argv[]){
 
     WelcomeMessage welcome;
     comm.SendRequest(welcome);
+
+    log(DEBUG, "Starting to send");
 
     delay(200);
     StatusQueryMessage query;
