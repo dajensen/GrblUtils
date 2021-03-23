@@ -1,1 +1,0 @@
-/usr/bin/c++ CMakeFiles/JoystickTest.dir/JoystickTest.cpp.o -o ../../bin/JoystickTest  -levdev ../baselib/libbaselib.a 

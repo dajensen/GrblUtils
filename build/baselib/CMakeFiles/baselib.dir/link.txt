@@ -1,2 +1,0 @@
-/usr/bin/ar qc libbaselib.a CMakeFiles/baselib.dir/FileLogger.cpp.o CMakeFiles/baselib.dir/OutputWindow.cpp.o CMakeFiles/baselib.dir/Utils.cpp.o CMakeFiles/baselib.dir/log.cpp.o
-/usr/bin/ranlib libbaselib.a
