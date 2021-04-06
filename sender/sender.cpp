@@ -167,11 +167,11 @@ int main(int argc, char *argv[]){
 
     std::string gcode_line;
     bool data_to_send = gcreader.ReadLine(gcode_line);
-    while(data_to_send) {
+    while(data_to_send || comm.AllLinesAcked()) {
 
         comm.CheckIncomingMessages();
 
-        if(comm.SendLine(gcode_line))
+        if(data_to_send && comm.SendLine(gcode_line))
             data_to_send = gcreader.ReadLine(gcode_line);
         else
             delay(100);
